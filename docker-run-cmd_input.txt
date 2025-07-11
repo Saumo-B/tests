@@ -1,0 +1,27 @@
+>docker network create test_network
+387b937f95fe1a42138ba80a2c3d638f1f3f42a15fcb3ece590792ecfc680441
+
+>docker run -d --name nginx --network test_network nginx
+b2c54d4801b52afd90dfdf9cf655662b44913399db58563ddaa24a7fa297c6cf
+
+>docker run -it --rm --name busy --network test_network busybox sh
+
+/ # ping -c1 nginx
+PING nginx (172.19.0.2): 56 data bytes
+64 bytes from 172.19.0.2: seq=0 ttl=64 time=2.203 ms
+
+--- nginx ping statistics ---
+1 packets transmitted, 1 packets received, 0% packet loss
+round-trip min/avg/max = 2.203/2.203/2.203 ms
+/ #
+/ #
+/ # ping nginx
+PING nginx (172.19.0.2): 56 data bytes
+64 bytes from 172.19.0.2: seq=0 ttl=64 time=0.123 ms
+64 bytes from 172.19.0.2: seq=1 ttl=64 time=0.112 ms
+64 bytes from 172.19.0.2: seq=2 ttl=64 time=0.075 ms
+^C
+--- nginx ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.075/0.103/0.123 ms
+/ # exit
