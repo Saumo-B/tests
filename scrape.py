@@ -1,13 +1,12 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 options = Options()
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.use_chromium = True
 
 service = EdgeService(executable_path="D:/edgedriver_win64/msedgedriver.exe")
